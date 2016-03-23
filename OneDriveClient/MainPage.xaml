@@ -10,14 +10,16 @@
     <Page.Resources>
         <DataTemplate x:Key="ft" x:DataType="local:FileViewModel">
             <Border Width="300" Height="200" Background="Beige">
-                <TextBlock Text="{x:Bind Name}" />
+                <StackPanel Margin="8">
+                    <TextBlock Text="{x:Bind Name}" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                </StackPanel>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="fd" x:DataType="local:FolderViewModel">
             <Border Width="300" Height="200"  Background="DarkBlue">
-                <StackPanel>
-                    <TextBlock Text="{x:Bind Name}" />
-                    <TextBlock Text="{x:Bind ChildCount}" />
+                <StackPanel Margin="8">
+                    <TextBlock Text="{x:Bind Name}" Style="{StaticResource SubheaderTextBlockStyle}" Foreground="White"/>
+                    <TextBlock Text="{x:Bind ChildCount}" Style="{StaticResource TitleTextBlockStyle}" Foreground="White"/>
                 </StackPanel>
             </Border>
         </DataTemplate>
@@ -29,7 +31,7 @@
         <GridView ItemsSource="{x:Bind FileList, Mode=OneWay}" ItemTemplateSelector="{StaticResource ts}">
         </GridView>
         <local:ClientCredentialsDialog x:Name="ClientDialog" />
-        <Grid>
+        <Grid Margin="128" >
             <ProgressRing HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="Gray"
                           IsActive="{x:Bind Busy, Mode=OneWay}" IsEnabled="{x:Bind Busy, Mode=OneWay}" />
         </Grid>
