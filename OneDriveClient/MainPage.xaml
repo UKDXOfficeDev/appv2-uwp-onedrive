@@ -9,8 +9,16 @@
     mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate x:Key="ft" x:DataType="local:FileViewModel">
-            <Border Width="300" Height="200" Background="Beige">
-                <StackPanel Margin="8">
+            <Border Width="300" Height="200" Background="Beige" RightTapped="StackPanel_RightTapped">
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem x:Name="EditButton"
+                                                            Text="Edit"/>
+                        <MenuFlyoutItem x:Name="DeleteButton"
+                                                            Text="Delete"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+                <StackPanel Margin="8" >
                     <TextBlock Text="{x:Bind Name}" Style="{StaticResource SubheaderTextBlockStyle}"/>
                 </StackPanel>
             </Border>
@@ -28,7 +36,8 @@
                                FolderTemplate="{StaticResource fd}"></local:TempateSelector> 
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <GridView ItemsSource="{x:Bind FileList, Mode=OneWay}" ItemTemplateSelector="{StaticResource ts}">
+        <GridView ItemsSource="{x:Bind FileList, Mode=OneWay}" ItemTemplateSelector="{StaticResource ts}"
+                  IsItemClickEnabled="False" IsRightTapEnabled="True">
         </GridView>
         <local:ClientCredentialsDialog x:Name="ClientDialog" />
         <Grid Margin="128" >

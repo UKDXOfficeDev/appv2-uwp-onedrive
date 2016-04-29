@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.Security.Authentication.Web;
 using Windows.Security.Credentials;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
 
@@ -45,7 +47,7 @@ namespace OneDriveClient
         //const string ClientId = "f164241c-bd0f-4948-85c3-b5d3defe4080";
         public string ClientId { get; set; }
 
-        const string Resource = "https://graph.microsoft.com/beta";
+        const string Resource = "https://graph.microsoft.com/";
         const string AuthEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
         const string TokenEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
         const string RedirectUri = "urn:ietf:wg:oauth:2.0:oob";
@@ -319,6 +321,14 @@ namespace OneDriveClient
                     return;
                 AddTokenToVault(ClientIdResourceName, ClientId, UserName);
             }
+        }
+
+        private void StackPanel_RightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
+        {
+            FrameworkElement senderElement = sender as FrameworkElement;
+            FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+            flyoutBase.Placement = FlyoutPlacementMode.Right;
+            flyoutBase.ShowAt(senderElement);
         }
     }
 }
